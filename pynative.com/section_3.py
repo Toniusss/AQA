@@ -1,4 +1,4 @@
-# link to exercises: https://pynative.com/python-if-else-and-for-loop-exercise-with-solutions/
+# Link to exercises: https://pynative.com/python-if-else-and-for-loop-exercise-with-solutions/
 
 
 # Exercise_1
