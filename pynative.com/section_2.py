@@ -1,5 +1,7 @@
 import os
 
+# Link to the exercises: https://pynative.com/python-input-and-output-exercise/
+
 # Exercise_1
 
 number_1 = input('Enter first number here: ')
