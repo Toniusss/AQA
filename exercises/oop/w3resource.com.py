@@ -23,7 +23,7 @@ print(f'Radius: {radius}, area: {Circle(radius).calculate_area()}, perimetr: {Ci
 
 # Exercise_2
 
-class Persons():
+class Person():
     def __init__(self, name, country, date_of_birth):
         self.name = name
         self.country = country
@@ -37,9 +37,9 @@ class Persons():
         return age
 
 
-person_1 = Persons("Ferdi Odilia", "France", date(1962, 7, 12))
-person_2 = Persons("Shweta Maddox", "Canada", date(1982, 10, 20))
-person_3 = Persons("Elizaveta Tilman", "USA", date(2000, 1, 1))
+person_1 = Person("Ferdi Odilia", "France", date(1962, 7, 12))
+person_2 = Person("Shweta Maddox", "Canada", date(1982, 10, 20))
+person_3 = Person("Elizaveta Tilman", "USA", date(2000, 1, 1))
 
 print(f'Age of the person 1: {person_1.get_age()}\nName: {person_1.name}\nCountry: {person_1.country}\nDate of Birth: {person_1.date_of_birth}\n')
 print(f'Age of the person 2: {person_2.get_age()}\nName: {person_2.name}\nCountry: {person_2.country}\nDate of Birth: {person_2.date_of_birth}\n')
