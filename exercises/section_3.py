@@ -1,7 +1,3 @@
-# Link to exercises: https://pynative.com/python-if-else-and-for-loop-exercise-with-solutions/
-
-
-
 # Exercise_1
 
 counter = 1
@@ -61,8 +57,8 @@ print(len(numbers_list))
 # Exercise_7
 
 for i in reversed(range(1, 6)):
-    for ii in reversed(range(i)):
-        print(f'{ii+1} ', end='')
+    for j in reversed(range(i)):
+        print(f'{j+1} ', end='')
     print(' ')
 
 # or

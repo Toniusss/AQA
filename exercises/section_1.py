@@ -197,8 +197,8 @@ print(tax_calc(total_yearly_income))
 
 for i in range(1, 11):
     print(i, ' ', end='')
-    for ii in range(2, 11):
-        print(i*ii, end=' ')
+    for j in range(2, 11):
+        print(i*j, end=' ')
     print('')
 
 
@@ -217,8 +217,8 @@ def exponent(base, exp):
     calculation_result = base ** len(exp_list)
 
     lists = []
-    for ii in exp_list:
-        lists.append(f'{ii} * ')
+    for j in exp_list:
+        lists.append(f'{j} * ')
     explain = ''.join(lists)[:-2]
     return calculation_result, explain
 
