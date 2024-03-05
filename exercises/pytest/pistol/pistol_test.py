@@ -11,7 +11,7 @@ def test_init():
     assert pistol.bullets == BULLETS_QTY_MAX_TEST
     assert pistol.pistol_is_locked is False
 
-def test_shots_without_misfires():
+def test_fire_all_bullets():
     for i in range(MAGAZINES_QTY_MAX_TEST + 1):
         for j in range(1, BULLETS_QTY_MAX_TEST + 1):
             if pistol.pistol_is_locked:
@@ -32,7 +32,6 @@ def test_misfire_probability():
                 counter += 1
                 pistol.unlock()
             pistol.shot()
-        print(counter)
         assert (shot_repeats / counter - 10) < 3
 
 def test_reload_with_bullets():
