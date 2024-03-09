@@ -2,46 +2,72 @@ import random
 
 
 class Pistol:
+    _MAX_BULLETS = 15
+    _MAX_MAGAZINES = 10
+    _PERCENTAGE_MISFIRES = 10
+
     def __init__(self):
-        self.BULLETS_QTY_MAX = 15
-        self.MAGAZINES_QTY_MAX = 2
-        self.bullets = self.BULLETS_QTY_MAX
-        self.magazines = self.MAGAZINES_QTY_MAX
+        self.bullets = self._MAX_BULLETS
+        self.magazines = self._MAX_MAGAZINES
         self.pistol_is_locked = False
 
     def shot(self):
-        if self.bullets > 0 or self.magazines > 0:
-            if self.pistol_is_locked:
-                return 'misfire'
-            if self.bullets == 0 and self.magazines > 0:
-                self.reload()
-            if self.bullets > 0:
-                if self.misfire():
+        if self.pistol_is_locked:
+            raise LockedException
+        # Ordinary shot
+        if 0 < self.bullets <= self._MAX_BULLETS:
+            if 0 <= self.magazines <= self._MAX_MAGAZINES:
+                # Random misfires
+                if random.randint(1, 100) <= self._PERCENTAGE_MISFIRES:
                     self.pistol_is_locked = True
+                    raise LockedException
+                # Shot
                 self.bullets -= 1
-                return True
+            else:
+                raise AmmunitionValueError
+        elif self.bullets == 0:
+            # Automatic reloading with 0 bullets
+            if 0 < self.magazines <= self._MAX_MAGAZINES:
+                self.reload()
+                self.shot()
+            # Out of bullets and magazines
+            elif self.magazines == 0:
+                raise OutOfBullets
+            else:
+                raise AmmunitionValueError
+        else:
+            raise AmmunitionValueError
 
     def reload(self):
         self.pistol_is_locked = False
-        if self.bullets >= 0 and self.magazines > 0:
+        # Automatic reload
+        if self.magazines > 0:
             self.magazines -= 1
-            self.bullets = self.BULLETS_QTY_MAX
-            return True
-        if self.bullets > 0 and self.magazines == 0:
-            return True
-        return False
+            self.bullets = self._MAX_BULLETS
+        else:
+            # The last magazine with bullets
+            if self.bullets > 0:
+                raise OutOfMagazines
 
     def amount(self):
-        amount_dict = {"magazines": self.magazines, "bullets": self.bullets}
-        return amount_dict
-
-    def unlock(self):
-        self.pistol_is_locked = False
-        return True
-
-    def misfire(self):
-        misfire_random = round(random.random(), 1)
-        if misfire_random == 0.1:
-            return True
+        return {"magazines": self.magazines, "bullets": self.bullets}
 
 
+class LockedException(Exception):
+    def __str__(self):
+        return 'The pistol is locked. Please reload it'
+
+
+class OutOfMagazines(Exception):
+    def __str__(self):
+        return 'There are no more magazines'
+
+
+class OutOfBullets(Exception):
+    def __str__(self):
+        return 'There are no more bullets'
+
+
+class AmmunitionValueError(Exception):
+    def __str__(self):
+        return 'Ammunition value error'
